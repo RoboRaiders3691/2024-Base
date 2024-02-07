@@ -30,6 +30,8 @@
 #include <frc/AnalogEncoder.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/geometry/Pose2d.h>
+#include <frc/geometry/Pose3d.h>
+#include <frc/geometry/Transform3d.h>
 
 
 class Robot : public frc::TimedRobot {

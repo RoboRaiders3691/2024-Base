@@ -61,6 +61,33 @@ void Robot::RobotPeriodic() {
       }
     );
     
+    // Compute the robot's field-relative position exclusively from vision
+
+  // measurements.
+
+
+  frc::Pose3d visionMeasurement3d = ObjectToRobotPose(
+
+      m_objectInField, m_robotToCamera, m_cameraToObjectEntryRef
+      );
+
+
+  // Convert robot's pose from Pose3d to Pose2d needed to apply vision
+
+  // measurements.
+
+  frc::Pose2d visionMeasurement2d = visionMeasurement3d.ToPose2d();
+
+
+  // Apply vision measurements. For simulation purposes only, we don't input a
+
+  // latency delay -- on a real robot, this must be calculated based either on
+
+  // known latency or timestamps.
+
+  m_poseEstimator.AddVisionMeasurement(visionMeasurement2d,
+
+                                       frc::Timer::GetFPGATimestamp());
 
   frc::Pose2d getpose;
   m_field.SetRobotPose(getpose);
