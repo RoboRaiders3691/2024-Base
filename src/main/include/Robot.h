@@ -29,6 +29,7 @@
 #include <frc/Encoder.h>
 #include <frc/AnalogEncoder.h>
 #include <frc/geometry/Rotation2d.h>
+#include <frc/geometry/Pose2d.h>
 
 
 class Robot : public frc::TimedRobot {

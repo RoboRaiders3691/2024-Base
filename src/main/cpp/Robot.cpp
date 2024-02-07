@@ -60,34 +60,10 @@ void Robot::RobotPeriodic() {
         units::meter_t{encoder_br.GetDistance()}
       }
     );
-  // Creating my odometry object from the kinematics object. Here,
-      // our starting pose is 5 meters along the long end of the field and in the
-      // center of the field along the short end, facing forward.
-      /*frc::MecanumDriveOdometry m_odometry{
-        m_kinematics,
-        getRotation2d,
-        frc::MecanumDriveWheelPositions{
-          units::meter_t{encoder_fl.GetDistance()},
-          units::meter_t{encoder_fr.GetDistance()},
-          units::meter_t{encoder_bl.GetDistance()},
-          units::meter_t{encoder_br.GetDistance()}
-        },
-        frc::Pose2d{5_m, 13.5_m, 0_rad}};*/
-  
+    
 
-/*frc::MecanumDriveOdometry m_odometry{
-  m_kinematics,
-  gyro.GetCompassHeading(),
-  frc::MecanumDriveWheelPositions{
-    units::meter_t{m_frontLeftEncoder.GetDistance()},
-    units::meter_t{m_frontRightEncoder.GetDistance()},
-    units::meter_t{m_backLeftEncoder.GetDistance()},
-    units::meter_t{m_backRightEncoder.GetDistance()}
-  },
-  frc::Pose2d{5_m, 13.5_m, 0_rad}
-  };*/
-
-  //m_field.SetRobotPose(m_poseEstimator);
+  frc::Pose2d getpose;
+  m_field.SetRobotPose(getpose);
 }
 
 /**
