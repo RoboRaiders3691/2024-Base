@@ -65,7 +65,6 @@ void Robot::RobotPeriodic() {
 
   // measurements.
 
-
   frc::Pose3d visionMeasurement3d = ObjectToRobotPose(
 
       m_objectInField, m_robotToCamera, m_cameraToObjectEntryRef

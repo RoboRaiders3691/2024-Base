@@ -32,6 +32,9 @@
 #include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Pose3d.h>
 #include <frc/geometry/Transform3d.h>
+#include <wpi/SymbolExports.h>
+#define WPILIB_DLLEXPORT
+class WPILIB_DLLEXPORT ObjectToRobotPose;
 
 
 class Robot : public frc::TimedRobot {
