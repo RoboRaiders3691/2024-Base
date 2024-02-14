@@ -65,7 +65,7 @@ void Robot::RobotPeriodic() {
 
   // measurements.
 
-  frc::Pose3d visionMeasurement3d = ObjectToRobotPose(
+  /*frc::Pose3d visionMeasurement3d = ObjectToRobotPose(
 
       m_objectInField, m_robotToCamera, m_cameraToObjectEntryRef
       );
@@ -86,12 +86,12 @@ void Robot::RobotPeriodic() {
 
   m_poseEstimator.AddVisionMeasurement(visionMeasurement2d,
 
-                                       frc::Timer::GetFPGATimestamp());
+                                       frc::Timer::GetFPGATimestamp());*/
 
   frc::Pose2d getpose;
   m_field.SetRobotPose(getpose);
 
-  
+
 }
 
 /**
