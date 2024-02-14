@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
+#include "LimelightHelpers.h"
 
 #include <fmt/core.h>
 #include <frc/smartdashboard/SmartDashboard.h>
