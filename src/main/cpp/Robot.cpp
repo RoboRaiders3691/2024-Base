@@ -33,7 +33,6 @@ void Robot::RobotPeriodic() {
 // Create kinematics object using the wheel locations.
   frc::MecanumDriveKinematics m_kinematics{ m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
 
-  
 // Creating my odometry object from the kinematics object. Here,
 // our starting pose is 5 meters along the long end of the field and in the
 // center of the field along the short end, facing forward.
@@ -91,6 +90,8 @@ void Robot::RobotPeriodic() {
 
   frc::Pose2d getpose;
   m_field.SetRobotPose(getpose);
+
+  
 }
 
 /**
