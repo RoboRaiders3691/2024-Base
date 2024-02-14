@@ -116,8 +116,5 @@ class Robot : public frc::TimedRobot {
 //Camera and Limelight
   photon::PhotonCamera pCamera{"Microsoft_Lifecam_HD-3000"};
 
-  double tx = LimelightHelpers::getTX("");
-  double ty = LimelightHelpers::getTY("");
-
   frc::Rotation2d getRotation2d;
 };
