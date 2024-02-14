@@ -113,6 +113,7 @@ class Robot : public frc::TimedRobot {
 
   frc::Field2d m_field;
 
+//Camera and Limelight
   photon::PhotonCamera pCamera{"Microsoft_Lifecam_HD-3000"};
 
   double tx = LimelightHelpers::getTX("");
