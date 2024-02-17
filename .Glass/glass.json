@@ -1,8 +1,43 @@
 {
   "NetworkTables Info": {
-    "Connections": {
-      "open": true
-    },
     "visible": true
+  },
+  "NetworkTables Settings": {
+    "mode": "Client (NT3)",
+    "serverTeam": "localhost"
+  },
+  "Plots": {
+    "Plot <0>": {
+      "plots": [
+        {
+          "backgroundColor": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.05999999865889549,
+            0.9399999976158142
+          ],
+          "height": 326
+        }
+      ],
+      "window": {
+        "visible": false
+      }
+    },
+    "Plot <1>": {
+      "plots": [
+        {
+          "backgroundColor": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.05999999865889549,
+            0.9399999976158142
+          ],
+          "height": 326
+        }
+      ],
+      "window": {
+        "visible": false
+      }
+    }
   }
 }
