@@ -35,6 +35,12 @@
 #include <wpi/SymbolExports.h>
 #define WPILIB_DLLEXPORT
 class WPILIB_DLLEXPORT ObjectToRobotPose;
+#include "frc/smartdashboard/Smartdashboard.h"
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableInstance.h"
+#include "networktables/NetworkTableEntry.h"
+#include "networktables/NetworkTableValue.h"
+#include "wpi/SpanExtras.h"
 
 
 
@@ -116,8 +122,11 @@ class Robot : public frc::TimedRobot {
 //Camera and Limelight
   photon::PhotonCamera pCamera{"Microsoft_Lifecam_HD-3000"};
 
-  //double tx = LimelightHelpers::getTX("");
-  //double ty = LimelightHelpers::getTY("");
+  std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+  double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
+  double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
+  double targetArea = table->GetNumber("ta",0.0);
+  double targetSkew = table->GetNumber("ts",0.0);
 
   frc::Rotation2d getRotation2d;
 };
