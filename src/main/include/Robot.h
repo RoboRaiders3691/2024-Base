@@ -129,4 +129,10 @@ class Robot : public frc::TimedRobot {
   double targetSkew = table->GetNumber("ts",0.0);
 
   frc::Rotation2d getRotation2d;
+
+//Gyro
+  PigeonIMU pGyro {0};
+  double fireAngle= PigeonIMU_BiasedStatus_2_Gyro; 
+  // Pigeon is on CANBus (powered from ~12V, and has a device ID of zero
+  PigeonIMU::GeneralStatus genStatus;
 };
