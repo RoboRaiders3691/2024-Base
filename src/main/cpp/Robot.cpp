@@ -151,8 +151,6 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
 
-
-
   lx = xbox.GetLeftX();
   ly = xbox.GetLeftY();
   rx = xbox.GetRightX();
@@ -166,8 +164,6 @@ void Robot::TeleopPeriodic() {
   LeftBumper = xbox.GetLeftBumper();
   RightTrigger = xbox.GetRightTriggerAxis();
   RightBumper = xbox.GetRightBumper();
-
-
 
 
   direction = atan2(ly,lx);
@@ -198,11 +194,11 @@ void Robot::TeleopPeriodic() {
 
   //frc::Field2d::NTSendable(&m_field);
 
-  //frc::Pose2d{5_m, 13.5_m, 0_rad};
   //frc::Field2d::SetRobotPose(5_m, 13.5_m, 0_rad);
   //frc::SmartDashboard::PutData("Position", getpose);
   frc::SmartDashboard::PutNumber("Direction", direction);
   frc::SmartDashboard::PutData("Field", &m_field);
+  nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv",0.0);
   
   //frc::Field2d::SetRobotPose()
   //frc::SmartDashboard::PutData(&m_field);
