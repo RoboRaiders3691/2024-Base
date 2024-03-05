@@ -61,6 +61,7 @@ void Robot::RobotPeriodic() {
       }
     );
     
+    
     // Compute the robot's field-relative position exclusively from vision
 
   // measurements.
@@ -68,14 +69,14 @@ void Robot::RobotPeriodic() {
   /*frc::Pose3d visionMeasurement3d = ObjectToRobotPose(
 
       m_objectInField, m_robotToCamera, m_cameraToObjectEntryRef
-      );
+      );*/
 
 
   // Convert robot's pose from Pose3d to Pose2d needed to apply vision
 
   // measurements.
 
-  frc::Pose2d visionMeasurement2d = visionMeasurement3d.ToPose2d();
+  //frc::Pose2d visionMeasurement2d = visionMeasurement3d.ToPose2d();
 
 
   // Apply vision measurements. For simulation purposes only, we don't input a
@@ -84,14 +85,13 @@ void Robot::RobotPeriodic() {
 
   // known latency or timestamps.
 
-  m_poseEstimator.AddVisionMeasurement(visionMeasurement2d,
+  /*m_poseEstimator.AddVisionMeasurement(visionMeasurement2d,
 
                                        frc::Timer::GetFPGATimestamp());*/
-
   frc::Pose2d getpose;
   m_field.SetRobotPose(getpose);
 
-  nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("<variablename>",0.0);
+  //nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("<variablename>",0.0);
 }
 
 /**
@@ -126,9 +126,35 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+
+  fr.ConfigFactoryDefault();
+  fl.ConfigFactoryDefault();
+  br.ConfigFactoryDefault();
+  bl.ConfigFactoryDefault();
+
+  fr.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+  fl.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+  br.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+  bl.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+
+  fr.SetSensorPhase(false);
+  fl.SetSensorPhase(false);
+  br.SetSensorPhase(false);
+  bl.SetSensorPhase(false);
+
+  fr.SetSelectedSensorPosition(0,0,10);
+  fl.SetSelectedSensorPosition(0,0,10);
+  br.SetSelectedSensorPosition(0,0,10);
+  bl.SetSelectedSensorPosition(0,0,10);
+
+  
+
+}
 
 void Robot::TeleopPeriodic() {
+
+
 
   lx = xbox.GetLeftX();
   ly = xbox.GetLeftY();
@@ -170,8 +196,21 @@ void Robot::TeleopPeriodic() {
   }
 
   spd = (spdmult);
+  
+  //frc::Field2d::InitSendable(&m_field);
 
+  //frc::Field2d::NTSendable(&m_field);
 
+  //frc::Pose2d{5_m, 13.5_m, 0_rad};
+  //frc::Field2d::SetRobotPose(5_m, 13.5_m, 0_rad);
+  //frc::SmartDashboard::PutData("Position", getpose);
+  frc::SmartDashboard::PutNumber("Direction", direction);
+  frc::SmartDashboard::PutData("Field", &m_field);
+  
+  //frc::Field2d::SetRobotPose()
+  //frc::SmartDashboard::PutData(&m_field);
+  //frc::SmartDashboard::UpdateValues();
+  //frc::SmartDashboard::PutData();
 
   if(ly>=0.1 || ly<=-0.1 || lx>=0.1 ||lx<=-0.1){
     fl.Set(ControlMode::PercentOutput, -spd*((sin(-direction+(.25*Pi)))*magnitude - turn));
@@ -193,7 +232,7 @@ void Robot::TeleopPeriodic() {
 
 
   if(AButton){
-  photon::PhotonPipelineResult result = pCamera.GetLatestResult();
+  //photon::PhotonPipelineResult result = pCamera.GetLatestResult();
 
 /*  double Yaw = result.GetBestTarget().GetYaw();
 
@@ -208,7 +247,7 @@ void Robot::TeleopPeriodic() {
   frc::SmartDashboard::PutNumber("Robot Skew", Area);
 */
 
-  photon::PhotonTrackedTarget target = result.GetBestTarget();
+  /*photon::PhotonTrackedTarget target = result.GetBestTarget();
 
   int targetID = target.GetFiducialId();
 
@@ -244,7 +283,7 @@ void Robot::TeleopPeriodic() {
 
   Xdistance = 0;
   Ydistance = 0;
-  Zdistance = 0;
+  Zdistance = 0;*/
  
 }
 

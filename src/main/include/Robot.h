@@ -27,7 +27,7 @@
 #include <frc/estimator/DifferentialDrivePoseEstimator.h>
 #include <frc/estimator/MecanumDrivePoseEstimator.h>
 #include <frc/Encoder.h>
-#include <frc/AnalogEncoder.h>
+#include <frc/DutyCycleEncoder.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Pose3d.h>
@@ -41,6 +41,8 @@ class WPILIB_DLLEXPORT ObjectToRobotPose;
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableValue.h"
 #include "wpi/SpanExtras.h"
+#include "networktables/NTSendableBuilder.h"
+#include "networktables/NTSendable.h"
 
 
 
@@ -67,13 +69,13 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
 
   TalonSRX fl{13};
-  frc::Encoder encoder_fl{0, 1};
+  frc::DutyCycleEncoder encoder_fl{13};
   TalonSRX fr{10};
-  frc::Encoder encoder_fr{0, 1};
+  frc::DutyCycleEncoder encoder_fr{10};
   TalonSRX bl{11};
-  frc::Encoder encoder_bl{0, 1};
+  frc::DutyCycleEncoder encoder_bl{11};
   TalonSRX br{12};
-  frc::Encoder encoder_br{0, 1};
+  frc::DutyCycleEncoder encoder_br{12};
 
   double spdmult = 0.8;
   double topspeed = 1;
@@ -120,13 +122,14 @@ class Robot : public frc::TimedRobot {
   frc::Field2d m_field;
 
 //Camera and Limelight
-  photon::PhotonCamera pCamera{"Microsoft_Lifecam_HD-3000"};
+  //photon::PhotonCamera pCamera{"Microsoft_Lifecam_HD-3000"};
 
-  std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-  double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
-  double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
-  double targetArea = table->GetNumber("ta",0.0);
-  double targetSkew = table->GetNumber("ts",0.0);
+  //std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+  //double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
+  //double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
+  //double targetArea = table->GetNumber("ta",0.0);
+  //double targetSkew = table->GetNumber("ts",0.0);
 
   frc::Rotation2d getRotation2d;
+
 };
