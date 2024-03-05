@@ -13,6 +13,27 @@ void Robot::RobotInit() {
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   frc::SmartDashboard::PutData("Field", &m_field);
+
+  
+  fr.ConfigFactoryDefault();
+  fl.ConfigFactoryDefault();
+  br.ConfigFactoryDefault();
+  bl.ConfigFactoryDefault();
+
+  fr.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+  fl.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+  br.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+  bl.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
+
+  fr.SetSensorPhase(false);
+  fl.SetSensorPhase(false);
+  br.SetSensorPhase(false);
+  bl.SetSensorPhase(false);
+
+  fr.SetSelectedSensorPosition(0,0,10);
+  fl.SetSelectedSensorPosition(0,0,10);
+  br.SetSelectedSensorPosition(0,0,10);
+  bl.SetSelectedSensorPosition(0,0,10);
 }
 
 /**
@@ -126,31 +147,7 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {
-
-  fr.ConfigFactoryDefault();
-  fl.ConfigFactoryDefault();
-  br.ConfigFactoryDefault();
-  bl.ConfigFactoryDefault();
-
-  fr.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
-  fl.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
-  br.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
-  bl.ConfigSelectedFeedbackSensor(TalonSRXFeedbackDevice::PulseWidthEncodedPosition, 0, 50);
-
-  fr.SetSensorPhase(false);
-  fl.SetSensorPhase(false);
-  br.SetSensorPhase(false);
-  bl.SetSensorPhase(false);
-
-  fr.SetSelectedSensorPosition(0,0,10);
-  fl.SetSelectedSensorPosition(0,0,10);
-  br.SetSelectedSensorPosition(0,0,10);
-  bl.SetSelectedSensorPosition(0,0,10);
-
-  
-
-}
+void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
 
