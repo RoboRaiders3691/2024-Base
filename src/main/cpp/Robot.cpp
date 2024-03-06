@@ -165,6 +165,7 @@ void Robot::TeleopPeriodic() {
   RightTrigger = xbox.GetRightTriggerAxis();
   RightBumper = xbox.GetRightBumper();
 
+  //pGyro.GetYawPitchRoll();
 
   direction = atan2(ly,lx);
   magnitude = hypot(lx,ly);
@@ -196,6 +197,7 @@ void Robot::TeleopPeriodic() {
 
   //frc::Field2d::SetRobotPose(5_m, 13.5_m, 0_rad);
   //frc::SmartDashboard::PutData("Position", getpose);
+  
   frc::SmartDashboard::PutNumber("Direction", direction);
   frc::SmartDashboard::PutData("Field", &m_field);
   nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv",0.0);
@@ -278,6 +280,23 @@ void Robot::TeleopPeriodic() {
   Ydistance = 0;
   Zdistance = 0;*/
  
+  double targetOffsetAngle_Vertical = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty",0.0);
+
+  // how many degrees back is your limelight rotated from perfectly vertical?
+    double limelightMountAngleDegrees = 25.0; 
+
+  // distance from the center of the Limelight lens to the floor
+  double limelightLensHeightInches = 20.0; 
+
+  // distance from the target to the floor
+  double goalHeightInches = 57.13; 
+
+  double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+  double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+  //calculate distance
+  double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)/tan(angleToGoalRadians);
+
 }
 
 

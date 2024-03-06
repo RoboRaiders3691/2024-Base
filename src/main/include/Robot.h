@@ -137,4 +137,5 @@ class Robot : public frc::TimedRobot {
   double fireAngle= PigeonIMU_BiasedStatus_2_Gyro; 
   // Pigeon is on CANBus (powered from ~12V, and has a device ID of zero
   PigeonIMU::GeneralStatus genStatus;
+
 };
