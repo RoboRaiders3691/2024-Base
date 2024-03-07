@@ -15,6 +15,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "ctre/Phoenix.h"
 #include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/FieldObject2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/kinematics/Odometry.h>
 #include <frc/kinematics/Kinematics.h>
