@@ -50,62 +50,13 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
 
-       // Set up wheel locations
-  frc::Translation2d m_frontLeftLocation{0.53416_m, 0.53416_m};
-  frc::Translation2d m_frontRightLocation{0.53416_m, -0.53416_m};
-  frc::Translation2d m_backLeftLocation{-0.53416_m, 0.53416_m};
-  frc::Translation2d m_backRightLocation{-0.53416_m, -0.53416_m};
-
-// Create kinematics object using the wheel locations.
-  frc::MecanumDriveKinematics m_kinematics{ m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
-
-// Creating my odometry object from the kinematics object. Here,
-// our starting pose is 5 meters along the long end of the field and in the
-// center of the field along the short end, facing forward.
-
-  /*frc::MecanumDrivePoseEstimator m_poseEstimator{
-      m_kinematics,
-      getRotation2d,
-      frc::MecanumDriveWheelPositions{
-          units::meter_t{encoder_fl.GetDistance()},
-          units::meter_t{encoder_fr.GetDistance()},
-          units::meter_t{encoder_bl.GetDistance()},
-          units::meter_t{encoder_br.GetDistance()}
-      },
-      frc::Pose2d{5_m, 13.5_m, 0_rad},
-      {0.01, 0.01, 0.01},
-      {0.1, 0.1, 0.1}
-    };
-    
-    m_poseEstimator.Update(
-      getRotation2d,
-      frc::MecanumDriveWheelPositions{
-        units::meter_t{encoder_fl.GetDistance()},
-        units::meter_t{encoder_fr.GetDistance()},
-        units::meter_t{encoder_bl.GetDistance()},
-        units::meter_t{encoder_br.GetDistance()}
-      }
-    );*/
-    
-  frc::MecanumDriveOdometry m_odometry{
-    m_kinematics,
+m_odometry.Update(
     getRotation2d,
-      frc::MecanumDriveWheelPositions{
-        units::meter_t{fr.GetSelectedSensorPosition(0)},
-        units::meter_t{fl.GetSelectedSensorPosition(0)},
-        units::meter_t{bl.GetSelectedSensorPosition(0)},
-        units::meter_t{br.GetSelectedSensorPosition(0)}
-  },
-  //frc::Pose2d{5_m, 23.5_m, 0_rad}
-  };
-
-  m_odometry.Update(
-      getRotation2d,
-      frc::MecanumDriveWheelPositions{
-        units::meter_t{fr.GetSelectedSensorPosition(0)},
-        units::meter_t{fl.GetSelectedSensorPosition(0)},
-        units::meter_t{bl.GetSelectedSensorPosition(0)},
-        units::meter_t{br.GetSelectedSensorPosition(0)}
+    frc::MecanumDriveWheelPositions{
+      units::meter_t{fr.GetSelectedSensorPosition(0)},
+      units::meter_t{fl.GetSelectedSensorPosition(0)},
+      units::meter_t{bl.GetSelectedSensorPosition(0)},
+      units::meter_t{br.GetSelectedSensorPosition(0)}
       }
     );
 
