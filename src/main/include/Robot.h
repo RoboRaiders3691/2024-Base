@@ -44,8 +44,7 @@ class WPILIB_DLLEXPORT ObjectToRobotPose;
 #include "wpi/SpanExtras.h"
 #include "networktables/NTSendableBuilder.h"
 #include "networktables/NTSendable.h"
-
-
+#include <rev/CANSparkMax.h>
 
 
 class Robot : public frc::TimedRobot {
@@ -70,18 +69,19 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
 
   TalonSRX fl{6};
-  frc::DutyCycleEncoder encoder_fl{6};
+  //frc::DutyCycleEncoder encoder_fl{6};
   TalonSRX fr{5};
-  frc::DutyCycleEncoder encoder_fr{5};
+  //frc::DutyCycleEncoder encoder_fr{5};
   TalonSRX bl{1};
-  frc::DutyCycleEncoder encoder_bl{1};
+  //frc::DutyCycleEncoder encoder_bl{1};
   TalonSRX br{0};
-  frc::DutyCycleEncoder encoder_br{0};
+  //frc::DutyCycleEncoder encoder_br{0};
 
   double spdmult = 0.8;
   double topspeed = 1;
-  
 
+  //rev::CANSparkMax lshooter{4, rev::CANSparkLowLevel::MotorType::kBrushless};
+  
 
   //Stick Vars
   double lx = 0.0;
