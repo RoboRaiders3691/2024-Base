@@ -69,14 +69,14 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
 
-  TalonSRX fl{13};
-  frc::DutyCycleEncoder encoder_fl{13};
-  TalonSRX fr{10};
-  frc::DutyCycleEncoder encoder_fr{10};
-  TalonSRX bl{11};
-  frc::DutyCycleEncoder encoder_bl{11};
-  TalonSRX br{12};
-  frc::DutyCycleEncoder encoder_br{12};
+  TalonSRX fl{6};
+  frc::DutyCycleEncoder encoder_fl{6};
+  TalonSRX fr{5};
+  frc::DutyCycleEncoder encoder_fr{5};
+  TalonSRX bl{1};
+  frc::DutyCycleEncoder encoder_bl{1};
+  TalonSRX br{0};
+  frc::DutyCycleEncoder encoder_br{0};
 
   double spdmult = 0.8;
   double topspeed = 1;
@@ -118,7 +118,7 @@ class Robot : public frc::TimedRobot {
   const double Pi = 3.1415926535;
 
   frc::XboxController xbox{0};
-  Pigeon2 gyro{4};
+  Pigeon2 gyro{24};
 
   frc::Field2d m_field;
 
@@ -134,9 +134,9 @@ class Robot : public frc::TimedRobot {
   frc::Rotation2d getRotation2d;
 
 //Gyro
-  PigeonIMU pGyro {0};
-  double fireAngle= PigeonIMU_BiasedStatus_2_Gyro; 
+  //PigeonIMU pGyro {0};
+  //double fireAngle= PigeonIMU_BiasedStatus_2_Gyro; 
   // Pigeon is on CANBus (powered from ~12V, and has a device ID of zero
-  PigeonIMU::GeneralStatus genStatus;
+  //PigeonIMU::GeneralStatus genStatus;
 
 };

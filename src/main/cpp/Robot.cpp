@@ -36,6 +36,8 @@ void Robot::RobotInit() {
   fl.SetSelectedSensorPosition(0,0,10);
   br.SetSelectedSensorPosition(0,0,10);
   bl.SetSelectedSensorPosition(0,0,10);
+
+  frc::Pose2d{5_m, 13.5_m, 0_rad};
 }
 
 /**
@@ -47,7 +49,8 @@ void Robot::RobotInit() {
  * LiveWindow and SmartDashboard integrated updating.
  */
 void Robot::RobotPeriodic() {
-// Set up wheel locations
+
+       // Set up wheel locations
   frc::Translation2d m_frontLeftLocation{0.53416_m, 0.53416_m};
   frc::Translation2d m_frontRightLocation{0.53416_m, -0.53416_m};
   frc::Translation2d m_backLeftLocation{-0.53416_m, 0.53416_m};
@@ -88,22 +91,24 @@ void Robot::RobotPeriodic() {
     m_kinematics,
     getRotation2d,
       frc::MecanumDriveWheelPositions{
-        units::meter_t{encoder_fl.GetDistance()},
-        units::meter_t{encoder_fr.GetDistance()},
-        units::meter_t{encoder_bl.GetDistance()},
-        units::meter_t{encoder_br.GetDistance()}
+        units::meter_t{fr.GetSelectedSensorPosition(0)},
+        units::meter_t{fl.GetSelectedSensorPosition(0)},
+        units::meter_t{bl.GetSelectedSensorPosition(0)},
+        units::meter_t{br.GetSelectedSensorPosition(0)}
   },
-  frc::Pose2d{5_m, 13.5_m, 0_rad}};
+  //frc::Pose2d{5_m, 23.5_m, 0_rad}
+  };
 
-    m_odometry.Update(
+  m_odometry.Update(
       getRotation2d,
       frc::MecanumDriveWheelPositions{
-        units::meter_t{encoder_fl.GetDistance()},
-        units::meter_t{encoder_fr.GetDistance()},
-        units::meter_t{encoder_bl.GetDistance()},
-        units::meter_t{encoder_br.GetDistance()}
+        units::meter_t{fr.GetSelectedSensorPosition(0)},
+        units::meter_t{fl.GetSelectedSensorPosition(0)},
+        units::meter_t{bl.GetSelectedSensorPosition(0)},
+        units::meter_t{br.GetSelectedSensorPosition(0)}
       }
     );
+
 
     // Compute the robot's field-relative position exclusively from vision
 
@@ -136,7 +141,10 @@ void Robot::RobotPeriodic() {
   //frc::Pose2d getpose;
 
   //m_field.SetRobotPose(frc::MecanumDrivePoseEstimator::GetEstimatedPosition);
-  m_field.SetRobotPose(m_odometry.GetPose());
+  //m_field.SetRobotPose(m_odometry.GetPose());
+  //frc::Pose2d(m_odometry.GetPose());
+  //frc::Field2d::SetRobotPose(m_odometry.GetPose());
+  //frc::Field2d SetRobotPose(m_odometry.GetPose());
   //nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("<variablename>",0.0);
 }
 
@@ -226,6 +234,7 @@ void Robot::TeleopPeriodic() {
   frc::SmartDashboard::PutNumber("Direction", direction);
   frc::SmartDashboard::PutData("Field", &m_field);
   nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv",0.0);
+  frc::SmartDashboard::PutNumber("encoderfl", fl.GetSelectedSensorPosition(0));
   
   
   //frc::Field2d::SetRobotPose()
