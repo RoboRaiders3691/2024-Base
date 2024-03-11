@@ -45,6 +45,7 @@ class WPILIB_DLLEXPORT ObjectToRobotPose;
 #include "networktables/NTSendableBuilder.h"
 #include "networktables/NTSendable.h"
 #include <rev/CANSparkMax.h>
+#include <rev/CANSparkLowLevel.h>
 
 
 class Robot : public frc::TimedRobot {
@@ -80,7 +81,7 @@ class Robot : public frc::TimedRobot {
   double spdmult = 0.8;
   double topspeed = 1;
 
-  //rev::CANSparkMax lshooter{4, rev::CANSparkLowLevel::MotorType::kBrushless};
+  rev::CANSparkMax lshooter{4, rev::CANSparkLowLevel::MotorType::kBrushless};
   
 
   //Stick Vars
