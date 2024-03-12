@@ -38,6 +38,12 @@ void Robot::RobotInit() {
   bl.SetSelectedSensorPosition(0,0,10);
 
   frc::Pose2d{5_m, 13.5_m, 0_rad};
+  //25 inches per rotation(to be checked)
+  encoder_fr.SetDistancePerRotation(25);
+  encoder_fl.SetDistancePerRotation(25);
+  encoder_br.SetDistancePerRotation(25);
+  encoder_bl.SetDistancePerRotation(25);
+
 }
 
 /**
@@ -50,15 +56,15 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
 
-m_odometry.Update(
+  m_odometry.Update(
     getRotation2d,
     frc::MecanumDriveWheelPositions{
-      units::meter_t{fr.GetSelectedSensorPosition(0)},
-      units::meter_t{fl.GetSelectedSensorPosition(0)},
-      units::meter_t{bl.GetSelectedSensorPosition(0)},
-      units::meter_t{br.GetSelectedSensorPosition(0)}
+        units::meter_t{encoder_fr.GetDistance()},
+        units::meter_t{encoder_fl.GetDistance()},
+        units::meter_t{encoder_bl.GetDistance()},
+        units::meter_t{encoder_br.GetDistance()}
       }
-    );
+  );
 
 
     // Compute the robot's field-relative position exclusively from vision
