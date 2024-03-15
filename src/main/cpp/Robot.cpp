@@ -65,44 +65,6 @@ void Robot::RobotPeriodic() {
         units::meter_t{encoder_br.GetDistance()}
       }
   );
-
-
-    // Compute the robot's field-relative position exclusively from vision
-
-  // measurements.
-
-  /*frc::Pose3d visionMeasurement3d = ObjectToRobotPose(
-
-      m_objectInField, m_robotToCamera, m_cameraToObjectEntryRef
-      );*/
-
-
-  // Convert robot's pose from Pose3d to Pose2d needed to apply vision
-
-  // measurements.
-
-  //frc::Pose2d visionMeasurement2d = visionMeasurement3d.ToPose2d();
-
-
-  // Apply vision measurements. For simulation purposes only, we don't input a
-
-  // latency delay -- on a real robot, this must be calculated based either on
-
-  // known latency or timestamps.
-
-  /*m_poseEstimator.AddVisionMeasurement(visionMeasurement2d,
-
-                                       frc::Timer::GetFPGATimestamp());*/
-  
-  
-  //frc::Pose2d getpose;
-
-  //m_field.SetRobotPose(frc::MecanumDrivePoseEstimator::GetEstimatedPosition);
-  //m_field.SetRobotPose(m_odometry.GetPose());
-  //frc::Pose2d(m_odometry.GetPose());
-  //frc::Field2d::SetRobotPose(m_odometry.GetPose());
-  //frc::Field2d SetRobotPose(m_odometry.GetPose());
-  //nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("<variablename>",0.0);
 }
 
 /**
@@ -275,7 +237,7 @@ void Robot::TeleopPeriodic() {
   double targetOffsetAngle_Vertical = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty",0.0);
 
   // how many degrees back is your limelight rotated from perfectly vertical?
-    double limelightMountAngleDegrees = 25.0; 
+  double limelightMountAngleDegrees = 25.0; 
 
   // distance from the center of the Limelight lens to the floor
   double limelightLensHeightInches = 20.0; 
@@ -289,6 +251,10 @@ void Robot::TeleopPeriodic() {
   //calculate distance
   double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)/tan(angleToGoalRadians);
 
+}
+
+if(YButton){
+  lshooter.Set(0.1);
 }
 
 

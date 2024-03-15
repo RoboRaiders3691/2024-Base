@@ -82,6 +82,8 @@ class Robot : public frc::TimedRobot {
   double topspeed = 1;
 
   rev::CANSparkMax lshooter{4, rev::CANSparkLowLevel::MotorType::kBrushless};
+  rev::CANSparkMax rshooter{4, rev::CANSparkLowLevel::MotorType::kBrushless};
+  rev::CANSparkMax intake{4, rev::CANSparkLowLevel::MotorType::kBrushless};
   
 
   //Stick Vars
@@ -126,11 +128,11 @@ class Robot : public frc::TimedRobot {
 //Camera and Limelight
   //photon::PhotonCamera pCamera{"Microsoft_Lifecam_HD-3000"};
 
-  //std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-  //double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
-  //double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
-  //double targetArea = table->GetNumber("ta",0.0);
-  //double targetSkew = table->GetNumber("ts",0.0);
+  std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+  double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
+  double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
+  double targetArea = table->GetNumber("ta",0.0);
+  double targetSkew = table->GetNumber("ts",0.0);
 
   frc::Rotation2d getRotation2d;
 
@@ -148,46 +150,6 @@ class Robot : public frc::TimedRobot {
 
 // Create kinematics object using the wheel locations.
   frc::MecanumDriveKinematics m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
-
-// Creating my odometry object from the kinematics object. Here,
-// our starting pose is 5 meters along the long end of the field and in the
-// center of the field along the short end, facing forward.
-
-  /*frc::MecanumDrivePoseEstimator m_poseEstimator{
-      m_kinematics,
-      getRotation2d,
-      frc::MecanumDriveWheelPositions{
-          units::meter_t{encoder_fl.GetDistance()},
-          units::meter_t{encoder_fr.GetDistance()},
-          units::meter_t{encoder_bl.GetDistance()},
-          units::meter_t{encoder_br.GetDistance()}
-      },
-      frc::Pose2d{5_m, 13.5_m, 0_rad},
-      {0.01, 0.01, 0.01},
-      {0.1, 0.1, 0.1}
-    };
-    
-    m_poseEstimator.Update(
-      getRotation2d,
-      frc::MecanumDriveWheelPositions{
-        units::meter_t{encoder_fl.GetDistance()},
-        units::meter_t{encoder_fr.GetDistance()},
-        units::meter_t{encoder_bl.GetDistance()},
-        units::meter_t{encoder_br.GetDistance()}
-      }
-    );*/
-    
-  /*frc::MecanumDriveOdometry m_odometry{
-    m_kinematics,
-    getRotation2d,
-      frc::MecanumDriveWheelPositions{
-        units::meter_t{fr.GetSelectedSensorPosition(0)},
-        units::meter_t{fl.GetSelectedSensorPosition(0)},
-        units::meter_t{bl.GetSelectedSensorPosition(0)},
-        units::meter_t{br.GetSelectedSensorPosition(0)}
-  },
-  frc::Pose2d{5_m, 23.5_m, 0_rad}
-  };*/
 
     frc::MecanumDriveOdometry m_odometry{
     m_kinematics,
