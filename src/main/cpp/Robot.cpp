@@ -37,6 +37,8 @@ void Robot::RobotInit() {
   br.SetSelectedSensorPosition(0,0,10);
   bl.SetSelectedSensorPosition(0,0,10);
 
+  double fr_distance = (((fr.GetSelectedSensorPosition(0))/4096)*25);
+
   frc::Pose2d{5_m, 13.5_m, 0_rad};
   //25 inches per rotation(to be checked)
   encoder_fr.SetDistancePerRotation(25);
@@ -59,11 +61,11 @@ void Robot::RobotPeriodic() {
   m_odometry.Update(
     getRotation2d,
     frc::MecanumDriveWheelPositions{
-        units::meter_t{encoder_fr.GetDistance()},
-        units::meter_t{encoder_fl.GetDistance()},
-        units::meter_t{encoder_bl.GetDistance()},
-        units::meter_t{encoder_br.GetDistance()}
-      }
+      units::inch_t{(((fr.GetSelectedSensorPosition(0))/4096)*25)},
+      units::inch_t{(((fl.GetSelectedSensorPosition(0))/4096)*25)},
+      units::inch_t{(((bl.GetSelectedSensorPosition(0))/4096)*25)},
+      units::inch_t{(((br.GetSelectedSensorPosition(0))/4096)*25)}
+    }
   );
 }
 

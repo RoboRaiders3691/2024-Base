@@ -70,13 +70,14 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
 
   TalonSRX fl{6};
-  frc::DutyCycleEncoder encoder_fl{0};
+  frc::DutyCycleEncoder encoder_fl{6};
   TalonSRX fr{5};
-  frc::DutyCycleEncoder encoder_fr{0};
+  frc::DutyCycleEncoder encoder_fr{5};
   TalonSRX bl{1};
-  frc::DutyCycleEncoder encoder_bl{0};
+  frc::DutyCycleEncoder encoder_bl{1};
   TalonSRX br{0};
   frc::DutyCycleEncoder encoder_br{0};
+  
 
   double spdmult = 0.8;
   double topspeed = 1;
@@ -155,10 +156,10 @@ class Robot : public frc::TimedRobot {
     m_kinematics,
     getRotation2d,
       frc::MecanumDriveWheelPositions{
-        units::meter_t{encoder_fr.GetDistance()},
-        units::meter_t{encoder_fl.GetDistance()},
-        units::meter_t{encoder_bl.GetDistance()},
-        units::meter_t{encoder_br.GetDistance()}
+        units::inch_t{(((fr.GetSelectedSensorPosition(0))/4096)*25)},
+        units::inch_t{(((fl.GetSelectedSensorPosition(0))/4096)*25)},
+        units::inch_t{(((bl.GetSelectedSensorPosition(0))/4096)*25)},
+        units::inch_t{(((br.GetSelectedSensorPosition(0))/4096)*25)}
   },
   frc::Pose2d{5_m, 23.5_m, 0_rad}
   };
